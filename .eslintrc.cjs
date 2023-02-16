@@ -20,5 +20,8 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  rules: { "new-cap": ["error", { capIsNewExceptions: ["Router"] }] },
+  rules: {
+    "new-cap": ["error", { capIsNewExceptions: ["Router"] }],
+    "no-implicit-coercion": "off",
+  },
 };

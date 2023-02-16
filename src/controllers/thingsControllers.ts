@@ -12,3 +12,11 @@ export const getThings = (
 ) => {
   res.status(200).json({ things });
 };
+
+export const getThing = (req: Request, res: Response) => {
+  const { idThing } = req.params;
+
+  const thing = things.find((thing) => thing.id === +idThing);
+
+  res.status(200).json({ thing });
+};
