@@ -16,4 +16,8 @@ app.use(express.json());
 
 app.use("/", thingsRouter);
 
+app.use((req, res) => {
+  res.status(404).json({ error: "Endpoint not found" });
+});
+
 app.listen(port);
