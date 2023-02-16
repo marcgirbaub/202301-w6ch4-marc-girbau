@@ -7,7 +7,7 @@ export const things: ThingsStrucutre = [
   },
   {
     id: 2,
-    name: "Reduc",
+    name: "Redux",
   },
   {
     id: 3,
