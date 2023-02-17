@@ -5,28 +5,34 @@ import createDebug from "debug";
 import { thingsRouter } from "./routers/thingsRouters.js";
 import inquirer, { type Answers } from "inquirer";
 import questions from "./questions.js";
-import { type AnswersQuestionaire } from "./types.js";
+import { type AnswersQuestionnaire } from "./types.js";
 
-(async () => {
-  await inquirer.prompt(questions).then((answers: AnswersQuestionaire) => {
-    const port = answers.port ?? 4000;
+export let isClientAuthorized: boolean;
 
-    const debug = createDebug("things:root");
+const program = async () => {
+  const answers = (await inquirer.prompt(questions)) as AnswersQuestionnaire;
 
-    const app = express();
+  const port = answers.port ?? 4000;
 
-    app.use(morgan("dev"));
+  isClientAuthorized = answers.isClientAuthorized;
 
-    app.use(express.json());
+  const debug = createDebug("things:root");
 
-    app.use("/", thingsRouter);
+  const app = express();
 
-    app.use((req, res) => {
-      res.status(404).json({ error: "Endpoint not found" });
-    });
+  app.use(morgan("dev"));
 
-    app.listen(port, () => {
-      debug(`The server is served in port ${port}`);
-    });
+  app.use(express.json());
+
+  app.use("/", thingsRouter);
+
+  app.use((req, res) => {
+    res.status(404).json({ error: "Endpoint not found" });
   });
-})();
+
+  app.listen(port, () => {
+    debug(`The server is served in port ${port}`);
+  });
+};
+
+await program();

@@ -7,6 +7,7 @@ export interface ThingStructure {
 
 export type ThingsStrucutre = ThingStructure[];
 
-export interface AnswersQuestionaire extends Answers {
+export interface AnswersQuestionnaire extends Answers {
   port: number;
+  isClientAuthorized: boolean;
 }
