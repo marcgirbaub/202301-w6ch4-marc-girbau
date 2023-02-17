@@ -17,8 +17,9 @@ export const getThing = (req: Request, res: Response) => {
 export const deleteThing = (req: Request, res: Response) => {
   const { idThing } = req.params;
 
-  const thingToDelete = things.findIndex((thing) => thing.id === +idThing);
-  const thingToDeletePosition = thingToDelete;
+  const thingToDeletePosition = things.findIndex(
+    (thing) => thing.id === +idThing
+  );
   things.splice(thingToDeletePosition, 1);
 
   res.status(200).json({ things });
